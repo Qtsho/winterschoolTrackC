@@ -38,7 +38,7 @@ public class LoadModifySaveExample {
 		// final File outputFile = new File("d:/temp/democar_1.amxmi");
 
 		// example: relative path
-		final File inputFile = new File("model-input/democar.amxmi");
+		final File inputFile = new File("Model/simpleModel.amxmi");
 		final File outputFile = new File("model-output/LoadModifySave/democar_1.amxmi");
 
 		// ***** Load *****
@@ -70,11 +70,31 @@ public class LoadModifySaveExample {
 		
 		LinkedList<Task> taskOdered = new LinkedList<>();
 		
-		for(Task t : taskList) {
-			t.getStimuli().get(0);
 		
-			taskOdered.add(t);
+		int[] array0=new int[taskList.size()];
+		int flag=0;
+		for(Task t : taskList) {
+			String str="";
+			str=t.getStimuli().get(0).toString();
+			String str0=str.substring(85, str.length()-3);
+			int x= Integer.parseInt(str0);
+			
+			array0[flag]=x;
+			flag++;	
 		}
+		flag=0;
+		for(int i=0; i<taskList.size(); i++) {
+			System.out.println(array0[i]);
+		}
+		
+		for(int i=0; i<taskList.size(); i++) {
+			for(int j=1; j<taskList.size()-i; j++) {
+				String str2=taskList.get(j).getStimuli().get(0).toString();
+				String pstr=str2.substring(85, str2.length()-3);
+				
+			}	
+		}
+		
 		
 		System.out.println("Size of linked list = " + taskOdered.size()); 
 		
