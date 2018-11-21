@@ -76,6 +76,7 @@ public class LoadModifySaveExample {
 		}
 		System.out.println("Size of linked list = " + taskOdered.size()); 
 		
+		
 		/*
 		Tag tag = fac.createTag();
 		tag.setName("The new tag!");
