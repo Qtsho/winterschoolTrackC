@@ -71,6 +71,7 @@ public class LoadModifySaveExample {
 		LinkedList<Task> taskOdered = new LinkedList<>();
 		
 		
+		/// making a integer array with using stimuli data from the tasks
 		int[] array0=new int[taskList.size()];
 		int flag=0;
 		for(Task t : taskList) {
@@ -87,16 +88,36 @@ public class LoadModifySaveExample {
 			System.out.println(array0[i]);
 		}
 		
+		
+		/// making a bubble sort with using task stimuli data
 		for(int i=0; i<taskList.size(); i++) {
 			for(int j=1; j<taskList.size()-i; j++) {
-				String str2=taskList.get(j).getStimuli().get(0).toString();
-				String pstr=str2.substring(85, str2.length()-3);
-				
+				if(array0[j-1]>array0[j]) {
+					int temp=array0[j-1];
+					array0[j-1]=array0[j];
+					array0[j]=temp;
+				}
 			}	
 		}
 		
 		
-		System.out.println("Size of linked list = " + taskOdered.size()); 
+		/// assigning tasks in order of bubble sort result
+		for(int i=0; i<taskList.size(); i++) {
+			for(int j=0; j<array0.length; j++) {
+				String str1=taskList.get(j).getStimuli().get(0).toString();
+				String pstr1=str1.substring(85, str1.length()-3);
+				int param=Integer.parseInt(pstr1);
+				if(array0[i]==param) {
+					taskOdered.add(taskList.get(j));
+				}
+			}
+		}
+		
+		
+		// Testing the List
+		for(int i=0; i<taskList.size(); i++) {
+			System.out.println(taskList.get(i).getName());
+		}
 		
 		
 		/*
