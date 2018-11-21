@@ -5,6 +5,7 @@ public class PrioritizedTask {
 	private Task task;
 	private int recurrence;
 	private int duration;
+	
 	public Task getTask() {
 		return task;
 	}

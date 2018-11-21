@@ -27,4 +27,16 @@ public class TaskList {
 		
 		return taskList;
 	}
+	
+	public static List<PrioritizedTask> buildDummyTaskListOneTask() {
+		List<PrioritizedTask> taskList = new LinkedList<>();
+		
+		PrioritizedTask taskA = new PrioritizedTask();
+		taskA.setDuration(3);
+		taskA.setRecurrence(15);
+	
+		taskList.add(taskA);
+		
+		return taskList;
+	}
 }

@@ -11,29 +11,40 @@ import schedule.dummyData.TaskList;
 public class Schedule {
 
 	public static void main(String[] args) {
-		List<PrioritizedTask> taskList = TaskList.buildDummyTaskList();
+		Schedule schedule = new Schedule();
+		List<PrioritizedTask> taskList = TaskList.buildDummyTaskListOneTask();
 		
-		List<ScheduledTask> scheduledTasks = new LinkedList<ScheduledTask>();
-		
-		// Actually the LCM-Function would be called to produce the 60
-		int hyperperiod = 60;
-		
-		PrioritizedTask t1 = taskList.get(0);
-		
-		ScheduledTask st1 = new ScheduledTask();
-		st1.setFrom(0);
-		st1.setTo(3);
-		scheduledTasks.add(st1);
-		
-
-		ScheduledTask st1 = new ScheduledTask();
-		st1.setFrom(0);
-		st1.setTo(3);
-		scheduledTasks.add(st1);
-		
-
-		
-		
-		
+		schedule.calculateActivation(taskList);
 	}
+	
+	public PrioritizedTask[][] calculateActivation(List<PrioritizedTask> taskList) {
+		int hyperperiod = calculateHyperperiod();
+		
+		PrioritizedTask[][] activation = new PrioritizedTask[hyperperiod+1][taskList.size()];
+		
+		for(PrioritizedTask task : taskList) {
+			int rec = task.getRecurrence();
+			int taskNo = taskList.indexOf(task);
+			
+			for(int i = 0; i <= hyperperiod;  i += rec) {
+				activation[i][taskNo] = task;
+			}
+		}
+		
+		
+		// TODO Remove afterwards
+		System.out.println("=========");
+		System.out.println("Activation");
+		for(int i = 0; i < activation.length; i++) {
+			System.out.println(i + " :: " + activation[i][0]);
+		}
+		System.out.println("=========");
+		
+		return activation;
+	}
+	
+	// TODO Call the LCM Function
+	private int calculateHyperperiod() {
+		return 60;
+	}	
 }
