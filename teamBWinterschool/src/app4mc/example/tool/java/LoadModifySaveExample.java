@@ -16,6 +16,7 @@
 package app4mc.example.tool.java;
 
 import java.io.File;
+import java.util.LinkedList;
 
 import org.eclipse.app4mc.amalthea.model.Amalthea;
 import org.eclipse.app4mc.amalthea.model.AmaltheaFactory;
@@ -54,6 +55,7 @@ public class LoadModifySaveExample {
 		// Used to create new objects within th eamalthea model.
 		final AmaltheaFactory fac = AmaltheaFactory.eINSTANCE;
 		
+		
 		EList<Stimulus> stimuliList = model.getStimuliModel().getStimuli();
 		for(Stimulus s : stimuliList) {
 			if(s instanceof PeriodicStimulus) {
@@ -65,7 +67,15 @@ public class LoadModifySaveExample {
 		for(Task t : taskList) {
 			t.getStimuli().get(0);
 		}
-
+		
+		LinkedList<Task> taskOdered = new LinkedList<>();
+		
+		for(Task t : taskList) {
+		t.getStimuli().get(0);
+		taskOdered.add(t);
+		}
+		System.out.println("Size of linked list = " + taskOdered.size()); 
+		
 		/*
 		Tag tag = fac.createTag();
 		tag.setName("The new tag!");
