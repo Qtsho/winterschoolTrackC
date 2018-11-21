@@ -32,6 +32,35 @@
       <runnableItems xsi:type="am:RunnableCall" runnable="Run3?type=Runnable"/>
     </runnables>
   </swModel>
+  <hwModel>
+    <definitions xsi:type="am:ProcessingUnitDefinition" name="Cortex-A9" puType="CPU" features="Instructions/IPC_1.0?type=HwFeature">
+      <customProperties key="EnEf-Volt_High">
+        <value xsi:type="am:DoubleObject" value="1.15"/>
+      </customProperties>
+      <customProperties key="EnEf-Volt_Low">
+        <value xsi:type="am:DoubleObject" value="1.05"/>
+      </customProperties>
+      <customProperties key="EnEf-Scale_High">
+        <value xsi:type="am:DoubleObject" value="1.0"/>
+      </customProperties>
+      <customProperties key="EnEf-Scale_Low">
+        <value xsi:type="am:DoubleObject" value="0.5"/>
+      </customProperties>
+    </definitions>
+    <featureCategories name="Instructions" featureType="performance">
+      <features name="IPC_1.0" value="1.0"/>
+    </featureCategories>
+    <structures name="Homogeneous Example System" structureType="System">
+      <structures name="Freescale i.MX6 Board" structureType="ECU">
+        <structures name="i.MX 6 Series Processor" structureType="Microcontroller">
+          <modules xsi:type="am:ProcessingUnit" name="Cortex-A9" frequencyDomain="792MHZ+Quartz?type=FrequencyDomain" definition="Cortex-A9?type=ProcessingUnitDefinition"/>
+        </structures>
+      </structures>
+    </structures>
+    <domains xsi:type="am:FrequencyDomain" name="792MHZ Quartz" clockGating="false">
+      <defaultValue value="792.0" unit="MHz"/>
+    </domains>
+  </hwModel>
   <stimuliModel>
     <stimuli xsi:type="am:PeriodicStimulus" name="">
       <recurrence value="15" unit="ms"/>
@@ -44,7 +73,7 @@
     </stimuli>
   </stimuliModel>
   <eventModel>
-    <events xsi:type="am:RunnableEvent" name="forRun1" description="" entity="Run1?type=Runnable"/>
+    <events xsi:type="am:RunnableEvent" name="forRun1" description="" entity="Run1?type=Runnable" processingUnit="Cortex-A9?type=ProcessingUnit"/>
     <events xsi:type="am:RunnableEvent" name="forRun2" entity="Run2?type=Runnable"/>
     <events xsi:type="am:RunnableEvent" name="forRun3" entity="Run3?type=Runnable"/>
   </eventModel>
