@@ -1,4 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<am:Amalthea xmi:version="2.0"
-	xmlns:xmi="http://www.omg.org/XMI"
-	xmlns:am="http://app4mc.eclipse.org/amalthea/0.9.1" />
+<am:Amalthea xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:am="http://app4mc.eclipse.org/amalthea/0.9.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <swModel>
+    <tasks name="Task1" multipleTaskActivationLimit="0">
+      <callGraph>
+        <graphEntries xsi:type="am:CallSequence" name="">
+          <calls xsi:type="am:TaskRunnableCall" runnable="Run1?type=Runnable"/>
+        </graphEntries>
+      </callGraph>
+    </tasks>
+    <tasks name="Task2" multipleTaskActivationLimit="0">
+      <callGraph>
+        <graphEntries xsi:type="am:CallSequence" name="">
+          <calls xsi:type="am:TaskRunnableCall" runnable="Run2?type=Runnable"/>
+        </graphEntries>
+      </callGraph>
+    </tasks>
+    <tasks name="Task3" multipleTaskActivationLimit="0">
+      <callGraph>
+        <graphEntries xsi:type="am:CallSequence" name="">
+          <calls xsi:type="am:TaskRunnableCall" runnable="Run3?type=Runnable"/>
+        </graphEntries>
+      </callGraph>
+    </tasks>
+    <runnables name="Run1" callback="false" service="false">
+      <runnableItems xsi:type="am:RunnableCall" runnable="Run1?type=Runnable"/>
+    </runnables>
+    <runnables name="Run2" callback="false" service="false">
+      <runnableItems xsi:type="am:RunnableCall" runnable="Run2?type=Runnable"/>
+    </runnables>
+    <runnables name="Run3" callback="false" service="false">
+      <runnableItems xsi:type="am:RunnableCall" runnable="Run3?type=Runnable"/>
+    </runnables>
+  </swModel>
+  <stimuliModel>
+    <stimuli xsi:type="am:PeriodicStimulus" name="">
+      <recurrence value="15" unit="ms"/>
+    </stimuli>
+    <stimuli xsi:type="am:PeriodicStimulus" name="">
+      <recurrence value="20" unit="ms"/>
+    </stimuli>
+    <stimuli xsi:type="am:PeriodicStimulus" name="">
+      <recurrence value="30" unit="ms"/>
+    </stimuli>
+  </stimuliModel>
+  <eventModel>
+    <events xsi:type="am:RunnableEvent" name="forRun1" description="" entity="Run1?type=Runnable"/>
+    <events xsi:type="am:RunnableEvent" name="forRun2" entity="Run2?type=Runnable"/>
+    <events xsi:type="am:RunnableEvent" name="forRun3" entity="Run3?type=Runnable"/>
+  </eventModel>
+  <constraintsModel>
+    <eventChains name="" stimulus="forRun1?type=RunnableEvent" response="forRun3?type=RunnableEvent">
+      <segments xsi:type="am:EventChainContainer">
+        <eventChain name="" stimulus="forRun2?type=RunnableEvent" response="forRun1?type=RunnableEvent"/>
+      </segments>
+      <segments xsi:type="am:EventChainContainer">
+        <eventChain name="" stimulus="forRun3?type=RunnableEvent" response="forRun2?type=RunnableEvent"/>
+      </segments>
+    </eventChains>
+  </constraintsModel>
+</am:Amalthea>
