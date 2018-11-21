@@ -71,10 +71,11 @@ public class LoadModifySaveExample {
 		LinkedList<Task> taskOdered = new LinkedList<>();
 		
 		for(Task t : taskList) {
-		t.getStimuli().get(0);
+			t.getStimuli().get(0);
 		
-		taskOdered.add(t);
+			taskOdered.add(t);
 		}
+		
 		System.out.println("Size of linked list = " + taskOdered.size()); 
 		
 		
