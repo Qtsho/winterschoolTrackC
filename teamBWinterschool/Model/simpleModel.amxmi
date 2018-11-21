@@ -24,12 +24,27 @@
     </tasks>
     <runnables name="Run1" callback="false" service="false">
       <runnableItems xsi:type="am:RunnableCall" runnable="Run1?type=Runnable"/>
+      <runnableItems xsi:type="am:ExecutionNeed">
+        <default key="Instructions">
+          <value xsi:type="am:NeedConstant" value="3"/>
+        </default>
+      </runnableItems>
     </runnables>
     <runnables name="Run2" callback="false" service="false">
       <runnableItems xsi:type="am:RunnableCall" runnable="Run2?type=Runnable"/>
+      <runnableItems xsi:type="am:ExecutionNeed">
+        <default key="Instructions">
+          <value xsi:type="am:NeedConstant" value="5"/>
+        </default>
+      </runnableItems>
     </runnables>
     <runnables name="Run3" callback="false" service="false">
       <runnableItems xsi:type="am:RunnableCall" runnable="Run3?type=Runnable"/>
+      <runnableItems xsi:type="am:ExecutionNeed">
+        <default key="Instructions">
+          <value xsi:type="am:NeedConstant" value="7"/>
+        </default>
+      </runnableItems>
     </runnables>
   </swModel>
   <hwModel>
