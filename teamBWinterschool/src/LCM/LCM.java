@@ -16,9 +16,9 @@ public class LCM {
 	}
 
 	public static int caculate_LCM(int[] times) {
-		int mult = 1;
-		int result = 0;
-		int gsd = times[0];
+		int mult = times[0];
+		int result = times[0];
+		int gsd = 0;
 		int length = times.length;
 		int flag = 0;
 		for (int i = 0; i < length; i++) {
@@ -36,12 +36,14 @@ public class LCM {
 		if (flg) {
 			for (int i = 0; i < length; i++) {
 				mult *= times[i];
-				gsd = LCM.GCD(gsd, times[i]);
+				gsd = LCM.GCD(result, times[i]);
+				result = mult / gsd;
+				mult = result;
+				
 			}
 			if (gsd == 0) {
 				throw new ArithmeticException("Division by zero");
 			}
-			result = mult / gsd;
 		}
 		return result;
 	}
@@ -49,7 +51,6 @@ public class LCM {
 	
 	public static void main(String[] args) {
 		// TODO Remove this
-		System.out.println("Hello!");
 		int[] arg = {15,20,30};
 		int result = 0;
 		result = LCM.caculate_LCM(arg);
