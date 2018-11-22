@@ -32,18 +32,17 @@ public class ModelExtractor {
 
 	public static void main(String[] args) {
 		ModelExtractor modelExtractor = new ModelExtractor();
-		modelExtractor.calculatePrioritizedTaskList();
+		modelExtractor.calculatePrioritizedTaskList("Model/simpleModel.amxmi");
 	}
 	
-	public PrioritizedTask[] calculatePrioritizedTaskList() {
+	public PrioritizedTask[] calculatePrioritizedTaskList(String inputFilePath) {
 
 		// example: absolute path
 		// final File inputFile = new File("d:/temp/democar.amxmi");
 		// final File outputFile = new File("d:/temp/democar_1.amxmi");
 
 		// example: relative path
-		final File inputFile = new File("Model/simpleModel.amxmi");
-		final File outputFile = new File("model-output/LoadModifySave/democar_1.amxmi");
+		final File inputFile = new File(inputFilePath);
 
 		// ***** Load *****
 
