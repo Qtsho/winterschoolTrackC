@@ -10,15 +10,15 @@ public class TaskList {
 		List<PrioritizedTask> taskList = new LinkedList<>();
 		
 		PrioritizedTask taskA = new PrioritizedTask();
-		taskA.setDuration(3);
+		//taskA.setDuration(3);
 		taskA.setRecurrence(15);
 		
 		PrioritizedTask taskB = new PrioritizedTask();
-		taskB.setDuration(5);
+		//taskB.setDuration(5);
 		taskB.setRecurrence(20);
 		
 		PrioritizedTask taskC = new PrioritizedTask();
-		taskC.setDuration(7);
+		//taskC.setDuration(7);
 		taskC.setRecurrence(30);
 		
 		taskList.add(taskA);
@@ -32,7 +32,7 @@ public class TaskList {
 		List<PrioritizedTask> taskList = new LinkedList<>();
 		
 		PrioritizedTask taskA = new PrioritizedTask();
-		taskA.setDuration(3);
+		//taskA.setDuration(3);
 		taskA.setRecurrence(15);
 	
 		taskList.add(taskA);
