@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
@@ -25,18 +26,28 @@ public class LatencyVisualizer {
 	public void run() {
 		String modelPath = "Model/simpleModel.amxmi";
 		
+		
+		
 		PrioritizedTask[] prioTasks = modelExtractor.calculatePrioritizedTaskList(modelPath);
 		List<PrioritizedTask> prioTaskList = new ArrayList<>(Arrays.asList(prioTasks));
 		PrioritizedTask[][] activation = scheduler.calculateActivation(prioTaskList);
 		RunnablesDuration[] scheduled = scheduler.scheduling(activation, prioTaskList);
-		Queue<String> eventChain = modelExtractor.extractEventChain(modelPath);
+		//Queue<String> eventChain = modelExtractor.extractEventChain(modelPath);
 		
-		// TODO Fix data type of eventChain
-		//latencyCalc.calculateE2ELatency(scheduled, eventChain);
 		
-		// TODO Integrate LCM
-		// TODO Latency
-		// Finish latency (Multiple passes)
+		// Create a dummy event chain
+		Queue<RunnablesDuration> eventChain = new LinkedList<>();
+		for(PrioritizedTask task : prioTaskList) {
+			for(RunnablesDuration runnable : task.getRunnables()) {
+				eventChain.add(runnable);
+			}
+		}
+		
+		List<Integer> latencies = latencyCalc.calculateE2ELatency(scheduled, eventChain);
+		System.out.println("======== RESULT =========");
+		System.out.println(latencies.get(0));
+		System.out.println("=================");
+
 
 	}
 	
