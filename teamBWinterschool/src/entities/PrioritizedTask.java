@@ -1,28 +1,42 @@
 package entities;
 import org.eclipse.app4mc.amalthea.model.Runnable;
 import org.eclipse.app4mc.amalthea.model.Task;
-import org.eclipse.app4mc.amalthea.model.SWModel;
-
+import org.eclipse.app4mc.amalthea.model.util.SoftwareUtil;
 import java.util.LinkedList;
 import java.util.List;
-import org.eclipse.app4mc.amalthea.model.HWModel;
+
 
 
 public class PrioritizedTask {
 	private int recurrence;
 	private Task task;
-	List<RunnablesDuration> runnables; 
-	
+	private List<RunnablesDuration> runnables; 
+	List<Runnable> ListofRunnables;
 	
 	
 	public PrioritizedTask() {
 		super();
 		runnables=new LinkedList<>();
 	}
+	
+	public void init() {
+		ListofRunnables = SoftwareUtil.getRunnableList(this.task, null);
+		for(Runnable r : ListofRunnables) {
+			RunnablesDuration x=new RunnablesDuration();
+			x.setRunable(r);
+			runnables.add(x);
+		}
 		
+		for(RunnablesDuration r : runnables) {
+			System.out.println(r.getRunable().getName());
+			r.setDuration();
+		}
+	}
+
 	public Task getTask() {
 		return task;
 	}
+	
 	public void setTask(Task task) {
 		this.task = task;
 	}
@@ -52,3 +66,4 @@ public class PrioritizedTask {
 	}
 
 }
+

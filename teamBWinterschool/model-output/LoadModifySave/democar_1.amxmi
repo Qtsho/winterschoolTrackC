@@ -95,10 +95,10 @@
   <constraintsModel>
     <eventChains name="" stimulus="forRun1?type=RunnableEvent" response="forRun3?type=RunnableEvent">
       <segments xsi:type="am:EventChainContainer">
-        <eventChain name="" stimulus="forRun2?type=RunnableEvent" response="forRun1?type=RunnableEvent"/>
+        <eventChain name="E1" stimulus="forRun2?type=RunnableEvent" response="forRun1?type=RunnableEvent"/>
       </segments>
       <segments xsi:type="am:EventChainContainer">
-        <eventChain name="" stimulus="forRun3?type=RunnableEvent" response="forRun2?type=RunnableEvent"/>
+        <eventChain name="E2" stimulus="forRun3?type=RunnableEvent" response="forRun2?type=RunnableEvent"/>
       </segments>
     </eventChains>
   </constraintsModel>
