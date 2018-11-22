@@ -22,6 +22,11 @@ public class RunnablesDuration {
 	public int getDuration() {
 		return duration;
 	}
+
+	public int setDuration(int duration) {
+		return this.duration = duration;
+	}
+	
 	public void setDuration() {
 		
 		List<ExecutionNeed> exeNeedList = SoftwareUtil.getExecutionNeedsList(runable, null);
