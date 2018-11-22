@@ -4,13 +4,18 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
+import javax.sound.midi.Soundbank;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.internal.runners.statements.RunAfters;
 
 import entities.PrioritizedTask;
+import entities.RunnablesDuration;
+import entities.TaskOutOfBoundsException;
 import schedule.dummyData.TaskList;
 
 public class TestSchedule {
@@ -37,6 +42,31 @@ public class TestSchedule {
 	}
 
 	@Test
+	public void testCalculateRunnabeForGivenTime() {
+		PrioritizedTask task1 = new PrioritizedTask();
+		RunnablesDuration run1 = new RunnablesDuration();
+		run1.setDuration(5);
+		RunnablesDuration run2 = new RunnablesDuration();
+		run2.setDuration(5);
+		
+		task1.getRunnables().add(run1);
+		task1.getRunnables().add(run2);
+		
+		try {
+			assertEquals(run1,
+					schedule.calculateRunnableForGivenTime(task1, 0));
+		} catch (TaskOutOfBoundsException e) {
+		}
+		
+
+		try {
+			assertEquals(run2,
+					schedule.calculateRunnableForGivenTime(task1, 5));
+		} catch (TaskOutOfBoundsException e) {
+		}
+	}
+	
+	@Test
 	public void testActivation() {
 		PrioritizedTask[][] activation = schedule.calculateActivation(taskList);
 		PrioritizedTask task1 = taskList.get(0);
@@ -51,27 +81,34 @@ public class TestSchedule {
 	@Test
 	public void testScheduling() {
 		PrioritizedTask task1 = taskList.get(0);
+		RunnablesDuration r1 = taskList.get(0).getRunnables().get(0);
+
 		PrioritizedTask[][] activation = schedule.calculateActivation(taskList);
-		PrioritizedTask[] actual = schedule.scheduling(activation);
-		PrioritizedTask[] expected = new PrioritizedTask[61];
+		RunnablesDuration[] actual = schedule.scheduling(activation);
+		RunnablesDuration[] expected = new RunnablesDuration[61];
 		
-		expected[0] = task1;
-		expected[1] = task1;
-		expected[2] = task1;
-		expected[15] = task1;
-		expected[16] = task1;
-		expected[17] = task1;
-		expected[30] = task1;
-		expected[31] = task1;
-		expected[32] = task1;
-		expected[45] = task1;
-		expected[46] = task1;
-		expected[47] = task1;
-		expected[60] = task1;
+		expected[0] = r1;
+		expected[1] = r1;
+		expected[2] = r1;
+		expected[15] = r1;
+		expected[16] = r1;
+		expected[17] = r1;
+		expected[30] = r1;
+		expected[31] = r1;
+		expected[32] = r1;
+		expected[45] = r1;
+		expected[46] = r1;
+		expected[47] = r1;
+		expected[60] = r1;
 		
 		assertArrayEquals(expected, actual);
 		
-		
+		System.out.println("==================");
+		System.out.println("Schedule");
+		for(int i = 0; i < actual.length; i++) {
+			System.out.println(i + " :: " + actual[i]);
+		}
+		System.out.println("==================");
 	}
 
 }

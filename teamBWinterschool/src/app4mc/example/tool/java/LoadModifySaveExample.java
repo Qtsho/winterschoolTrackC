@@ -80,8 +80,8 @@ public class LoadModifySaveExample {
 		for(Task t : taskList) {
 			priorList[flag0] = new PrioritizedTask();
 			priorList[flag0].setTask(t);
-			priorList[flag0].setSwm(swm);
-			priorList[flag0].setHwm(hwm);
+			//priorList[flag0].setSwm(swm);
+			//priorList[flag0].setHwm(hwm);
 
 			t.getStimuli().get(0);
 			flag0++;
@@ -147,10 +147,10 @@ public class LoadModifySaveExample {
 		
 		//System.out.println(priorList[0].getHwm().getDomains().get(0).);
 		
-		System.out.println(priorList[0].getHwm().getStructures().get(0).getStructures().get(0).getStructures().get(0).getModules().get(0));
+		//System.out.println(priorList[0].getHwm().getStructures().get(0).getStructures().get(0).getStructures().get(0).getModules().get(0));
 		
-		Frequency sss = HardwareUtil.getFrequencyOfModule(priorList[0].getHwm().getStructures().get(0).getStructures().get(0).getStructures().get(0).getModules().get(0));
-		System.out.println(sss.getUnit());
+		//Frequency sss = HardwareUtil.getFrequencyOfModule(priorList[0].getHwm().getStructures().get(0).getStructures().get(0).getStructures().get(0).getModules().get(0));
+		//System.out.println(sss.getUnit());
 				
 		/*
 		Tag tag = fac.createTag();
