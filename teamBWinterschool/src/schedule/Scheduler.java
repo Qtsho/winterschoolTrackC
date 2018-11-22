@@ -11,6 +11,7 @@ import entities.PrioritizedTaskComparator;
 import entities.RunnablesDuration;
 import entities.TaskOutOfBoundsException;
 import schedule.dummyData.TaskList;
+import util.LCM;
 
 public class Scheduler {
 
@@ -22,7 +23,7 @@ public class Scheduler {
 	}
 	
 	public PrioritizedTask[][] calculateActivation(List<PrioritizedTask> taskList) {
-		int hyperperiod = calculateHyperperiod();
+		int hyperperiod = calculateHyperperiod(taskList);
 		
 		PrioritizedTask[][] activation = new PrioritizedTask[hyperperiod+1][taskList.size()];
 		
@@ -47,11 +48,11 @@ public class Scheduler {
 		return activation;
 	}
 	
-	public RunnablesDuration[] scheduling(PrioritizedTask[][] activation) {
+	public RunnablesDuration[] scheduling(PrioritizedTask[][] activation, List<PrioritizedTask> taskList) {
 		PrioritizedTask currentTask = null;
 		int currentTaskEnd = 0;
 		int timeSpendInCurrentTask = 0;
-		RunnablesDuration[] scheduledRunnables = new RunnablesDuration[calculateHyperperiod()+1];
+		RunnablesDuration[] scheduledRunnables = new RunnablesDuration[calculateHyperperiod(taskList)+1];
 		PriorityQueue<PrioritizedTask> taskQueue = new PriorityQueue<>(10, new PrioritizedTaskComparator());
 		
 		// TODO Refactor: Extract into functions
@@ -122,7 +123,14 @@ public class Scheduler {
 	
 	
 	// TODO Call the LCM Function
-	private int calculateHyperperiod() {
-		return 60;
+	private int calculateHyperperiod(List<PrioritizedTask> taskList) {
+		int[] recurrences = new int[taskList.size()];
+		
+		for(int i = 0; i < taskList.size(); i++) {
+			recurrences[i] = taskList.get(i).getRecurrence();
+		}
+		
+		
+		return LCM.caculateLCM(recurrences);
 	}	
 }

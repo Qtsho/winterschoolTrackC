@@ -28,7 +28,7 @@ public class LatencyVisualizer {
 		PrioritizedTask[] prioTasks = modelExtractor.calculatePrioritizedTaskList(modelPath);
 		List<PrioritizedTask> prioTaskList = new ArrayList<>(Arrays.asList(prioTasks));
 		PrioritizedTask[][] activation = scheduler.calculateActivation(prioTaskList);
-		RunnablesDuration[] scheduled = scheduler.scheduling(activation);
+		RunnablesDuration[] scheduled = scheduler.scheduling(activation, prioTaskList);
 		Queue<String> eventChain = modelExtractor.extractEventChain(modelPath);
 		
 		// TODO Fix data type of eventChain

@@ -75,47 +75,8 @@ public class TestSchedule {
 		
 		assertEquals(activation[0][0], task1);
 		assertEquals(activation[15][0], task1);
-		assertEquals(activation[30][0], task1);
-		assertEquals(activation[45][0], task1);
-		assertEquals(activation[60][0], task1);
 	}
 	
-	@Test
-	public void testScheduling() {
-		PrioritizedTask task1 = taskList.get(0);
-		RunnablesDuration r1 = taskList.get(0).getRunnables().get(0);
-		
-		PrioritizedTask[][] activation = schedule.calculateActivation(taskList);
-		RunnablesDuration[] actual = schedule.scheduling(activation);
-		RunnablesDuration[] expected = new RunnablesDuration[61];
-		
-		expected[0] = r1;
-		expected[1] = r1;
-		expected[2] = r1;
-		
-		expected[15] = r1;
-		expected[16] = r1;
-		expected[17] = r1;
-		
-		expected[30] = r1;
-		expected[31] = r1;
-		expected[32] = r1;
-		
-		expected[45] = r1;
-		expected[46] = r1;
-		expected[47] = r1;
-		
-		expected[60] = r1;
-	
-		assertArrayEquals(expected, actual);
-		
-		System.out.println("==================");
-		System.out.println("Schedule");
-		for(int i = 0; i < actual.length; i++) {
-			System.out.println(i + " :: " + actual[i]);
-		}
-		System.out.println("==================");
-	}
 	
 	@Test
 	public void testMultipleTask () {
@@ -130,7 +91,7 @@ public class TestSchedule {
 		RunnablesDuration r3 = taskList.get(2).getRunnables().get(0);
 		
 		PrioritizedTask[][] activation = schedule.calculateActivation(taskList);
-		RunnablesDuration[] actual = schedule.scheduling(activation);
+		RunnablesDuration[] actual = schedule.scheduling(activation, taskList);
 		RunnablesDuration[] expected = new RunnablesDuration[61];
 		
 		expected[0] = r1;

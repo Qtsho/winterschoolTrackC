@@ -1,8 +1,8 @@
-package LCM;
+package util;
 
 public class LCM {
 	
-	public static int GCD(int a, int b) {
+	public static int calculateGCD(int a, int b) {
 		if ((a == 0 && b == 0) || (a == 0) || (b == 0)) {
 			throw new ArithmeticException("Incorect data");
 		}
@@ -15,7 +15,7 @@ public class LCM {
 		return gcd;
 	}
 
-	public static int caculate_LCM(int[] times) {
+	public static int caculateLCM(int[] times) {
 		int mult = times[0];
 		int result = times[0];
 		int gsd = 0;
@@ -45,7 +45,7 @@ public class LCM {
 		if (flg) {
 			for (int i = 0; i < length; i++) {
 				mult *= times[i];
-				gsd = LCM.GCD(result, times[i]);
+				gsd = LCM.calculateGCD(result, times[i]);
 				result = mult / gsd;
 				mult = result;
 				
@@ -62,7 +62,7 @@ public class LCM {
 		// TODO Remove this
 		int[] arg = {15,20,30};
 		int result = 0;
-		result = LCM.caculate_LCM(arg);
+		result = LCM.caculateLCM(arg);
 		System.out.println(result);
 	}
 }
