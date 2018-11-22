@@ -1,14 +1,18 @@
-package LCM_Test;
+package test.lcm;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 import LCM.LCM;
 
-class LCM_test {
+public class LCM_test {
 	int length = 0;
 	int[] test1 = {15,20,30};
 	int[] test2 = {0,0,0};
 	int[] test3 = {14,0,5};
 
-	/*
+	
 	@Test
 	public void test1() {
 		//fail("Not yet implemented");
@@ -24,5 +28,4 @@ class LCM_test {
 	public void test_one_element_is_zero() {
 		assertEquals(0,LCM.caculate_LCM(test3));
 	}
-	*/
 }

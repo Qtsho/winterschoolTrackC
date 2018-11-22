@@ -1,6 +1,7 @@
 package LCM;
 
 public class LCM {
+	
 	public static int GCD(int a, int b) {
 		if ((a == 0 && b == 0) || (a == 0) || (b == 0)) {
 			throw new ArithmeticException("Incorect data");
@@ -47,6 +48,7 @@ public class LCM {
 	
 	
 	public static void main(String[] args) {
+		// TODO Remove this
 		System.out.println("Hello!");
 		int[] arg = {15,20,30};
 		int result = 0;
