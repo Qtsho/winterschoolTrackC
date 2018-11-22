@@ -1,14 +1,40 @@
 package latency;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+import entities.EventChainNotCompletedException;
 import entities.RunnablesDuration;
 
 public class LatencyCalculator {
 	
+	// TODO Calculates too many latencies (see test `TestLateny.testCalculateE2ELatency`})
+	/**
+	 * @return a sorted list of all latencies for the given event chain. The first element is the worst case.
+	 */
+	public List<Integer> calculateE2ELatency(RunnablesDuration[] runnables, Queue<RunnablesDuration> eventChain) {		
+		List<Integer> latencies = new LinkedList<>();
+		
+		try {
+			while(true) {
+				Queue<RunnablesDuration> eventChainCopy = new LinkedList<RunnablesDuration>(eventChain);
+				int latency = calculateE2ELatency_onePass(runnables, eventChainCopy);
+				latencies.add(latency);
+			}
+		} catch (EventChainNotCompletedException e) {
+			// No further results
+		}
+		
+		Collections.sort(latencies, Collections.reverseOrder());
+		
+		return latencies;
+	}
 	
-	public int calculateE2ELatency(RunnablesDuration[] runnables, Queue<RunnablesDuration> eventChain) {
+	public int calculateE2ELatency_onePass(RunnablesDuration[] runnables, Queue<RunnablesDuration> eventChain) throws EventChainNotCompletedException {
 		if(eventChain.size() == 0) {
 			throw new IllegalArgumentException("EventChain mustn't be empty");
 		}
@@ -53,7 +79,7 @@ public class LatencyCalculator {
 				break;
 			}
 			// Chain ends
-			else if(chainStarted && lastInput) {
+			else if(chainStarted && lastInput && nextState == null) {
 				chainFinished = true;
 				break;
 			}
@@ -66,7 +92,7 @@ public class LatencyCalculator {
 		}
 		
 		if(!chainFinished) {
-			// TODO The chain couldn't be finished
+			throw new EventChainNotCompletedException();
 		}
 		
 		return e2eLatency;
