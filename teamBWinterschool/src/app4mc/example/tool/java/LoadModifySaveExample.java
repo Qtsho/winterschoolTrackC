@@ -17,6 +17,7 @@ package app4mc.example.tool.java;
 import entities.*;
 import java.io.File;
 import java.util.LinkedList;
+import java.util.Queue;
 
 import org.eclipse.app4mc.amalthea.model.Amalthea;
 import org.eclipse.app4mc.amalthea.model.AmaltheaFactory;
@@ -24,6 +25,10 @@ import org.eclipse.app4mc.amalthea.model.Frequency;
 import org.eclipse.app4mc.amalthea.model.HWModel;
 import org.eclipse.app4mc.amalthea.model.PeriodicStimulus;
 import org.eclipse.app4mc.amalthea.model.SWModel;
+import org.eclipse.app4mc.amalthea.model.StimuliModel;
+import org.eclipse.app4mc.amalthea.model.ConstraintsModel;
+import org.eclipse.app4mc.amalthea.model.EventChain;
+import org.eclipse.app4mc.amalthea.model.EventChainItem;
 import org.eclipse.app4mc.amalthea.model.Stimulus;
 import org.eclipse.app4mc.amalthea.model.Tag;
 import org.eclipse.app4mc.amalthea.model.Task;
@@ -51,7 +56,7 @@ public class LoadModifySaveExample {
 		Amalthea model = AmaltheaLoader.loadFromFile(inputFile);
 
 		HWModel hwm = model.getHwModel();
-		
+	
 		if (model == null) {
 			System.out.println("Error: No model loaded!");
 			return;
@@ -59,9 +64,8 @@ public class LoadModifySaveExample {
 		
 		// ***** Modify *****
 
-		// Used to create new objects within th eamalthea model.
+		// Used to create new objects within the amalthea model.
 		final AmaltheaFactory fac = AmaltheaFactory.eINSTANCE;
-		
 		
 		EList<Stimulus> stimuliList = model.getStimuliModel().getStimuli();
 		for(Stimulus s : stimuliList) {
@@ -69,6 +73,28 @@ public class LoadModifySaveExample {
 				((PeriodicStimulus) s).getRecurrence();
 			}
 		}
+		
+		//Extract runnable queue from Constraint Model
+		ConstraintsModel csm = model.getConstraintsModel();
+		EList<EventChain> evenlist = csm.getEventChains();
+		EventChain event = evenlist.get(0);
+		
+		Queue<String> rQueue = new LinkedList<String>();
+		
+		EList<EventChainItem> queueList = event.getSegments();
+		//System.out.println(queueList.size());
+		
+		for (int i = 0; i < queueList.size(); i++) {
+			rQueue.add(event.getSegments().get(i).getEventChain().getResponse().getName());
+		}
+		rQueue.add(event.getSegments().get(queueList.size() - 1).getEventChain().getStimulus().getName());
+		
+//		System.out.println(rQueue.poll());
+//		System.out.println(rQueue.remove());
+//		System.out.println(rQueue.poll());
+//		System.out.println(rQueue.remove());
+		
+		
 		
 		SWModel swm = model.getSwModel();
 		
@@ -86,7 +112,7 @@ public class LoadModifySaveExample {
 			t.getStimuli().get(0);
 			flag0++;
 		}
-		System.out.println(priorList[0]);
+		//System.out.println(priorList[0]);
 		
 		LinkedList<Task> taskOdered = new LinkedList<>();
 
@@ -107,7 +133,7 @@ public class LoadModifySaveExample {
 		}
 		flag=0;
 		for(int i=0; i<priorList.length; i++) {
-			System.out.println(array0[i]);
+			//System.out.println(array0[i]);
 		}
 		
 		/// making a bubble sort with using task stimuli data
@@ -125,7 +151,7 @@ public class LoadModifySaveExample {
 		/// assigning tasks in order of bubble sort result
 		for(int i=0; i<priorList.length; i++) {
 			for(int j=0; j<array0.length; j++) {
-				String str1=taskList.get(j).getStimuli().get(0).toString();
+				String str1= taskList.get(j).getStimuli().get(0).toString();
 				String pstr1=str1.substring(85, str1.length()-3);
 				
 				int param=Integer.parseInt(pstr1);
@@ -141,9 +167,8 @@ public class LoadModifySaveExample {
 			
 			//System.out.println(taskOdered.get(i).getName());
 			priorList[i].setRecurrence();
-			System.out.println(priorList[i].getRecurrence());
+			//System.out.println(priorList[i].getRecurrence());
 		}
-		
 		
 		//System.out.println(priorList[0].getHwm().getDomains().get(0).);
 		
