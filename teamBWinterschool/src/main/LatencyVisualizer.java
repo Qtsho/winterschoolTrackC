@@ -3,6 +3,7 @@ package main;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Queue;
 
 import entities.PrioritizedTask;
 import entities.RunnablesDuration;
@@ -22,13 +23,18 @@ public class LatencyVisualizer {
 	}
 	
 	public void run() {
-		PrioritizedTask[] prioTasks = modelExtractor.calculatePrioritizedTaskList("Model/simpleModel.amxmi");
+		String modelPath = "Model/simpleModel.amxmi";
+		
+		PrioritizedTask[] prioTasks = modelExtractor.calculatePrioritizedTaskList(modelPath);
 		List<PrioritizedTask> prioTaskList = new ArrayList<>(Arrays.asList(prioTasks));
 		PrioritizedTask[][] activation = scheduler.calculateActivation(prioTaskList);
 		RunnablesDuration[] scheduled = scheduler.scheduling(activation);
-		// TODO Add Event Chain
-		// latencyCalc.calculateE2ELatency(scheduled, eventChain);
+		Queue<String> eventChain = modelExtractor.extractEventChain(modelPath);
 		
+		// TODO Fix data type of eventChain
+		//latencyCalc.calculateE2ELatency(scheduled, eventChain);
+		
+		// TODO Integrate LCM
 		// TODO Latency
 		// Finish latency (Multiple passes)
 
