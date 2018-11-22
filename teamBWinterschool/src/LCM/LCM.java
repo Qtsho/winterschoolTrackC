@@ -21,6 +21,15 @@ public class LCM {
 		int gsd = 0;
 		int length = times.length;
 		int flag = 0;
+		int flag_for_zero = 0;
+		for(int i = 0; i<length; i++) {
+			if(times[i]==0) {
+				flag_for_zero++;
+			}
+		}
+		if(flag_for_zero == length) {
+			throw new ArithmeticException("Incorect data");
+		}
 		for (int i = 0; i < length; i++) {
 			if (times[i] == 0) {
 				flag++;
