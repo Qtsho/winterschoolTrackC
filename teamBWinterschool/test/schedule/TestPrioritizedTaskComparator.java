@@ -16,7 +16,7 @@ import schedule.dummyData.TaskList;
 
 public class TestPrioritizedTaskComparator {
 	
-	Schedule schedule;
+	Scheduler schedule;
 	List<PrioritizedTask> taskList;
 	
 	@BeforeClass
@@ -29,7 +29,7 @@ public class TestPrioritizedTaskComparator {
 
 	@Before
 	public void setUp() throws Exception {
-		schedule = new Schedule();
+		schedule = new Scheduler();
 		taskList = TaskList.buildDummyTaskListOneTask();
 	}
 

@@ -12,10 +12,10 @@ import entities.RunnablesDuration;
 import entities.TaskOutOfBoundsException;
 import schedule.dummyData.TaskList;
 
-public class Schedule {
+public class Scheduler {
 
 	public static void main(String[] args) {
-		Schedule schedule = new Schedule();
+		Scheduler schedule = new Scheduler();
 		List<PrioritizedTask> taskList = TaskList.buildDummyTaskListOneTask();
 		
 		schedule.calculateActivation(taskList);

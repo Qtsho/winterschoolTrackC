@@ -17,7 +17,7 @@ public class TestLatency {
 
 	@Test
 	public void test_multipleRunnables() {
-		Latency latency = new Latency();
+		LatencyCalculator latency = new LatencyCalculator();
 		
 		RunnablesDuration r1 = new RunnablesDuration();
 		r1.setDuration(1);
@@ -51,7 +51,7 @@ public class TestLatency {
 
 	@Test
 	public void test_twoRunnables() {
-		Latency latency = new Latency();
+		LatencyCalculator latency = new LatencyCalculator();
 		
 		RunnablesDuration r1 = new RunnablesDuration();
 		r1.setDuration(1);

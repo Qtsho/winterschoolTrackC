@@ -20,7 +20,7 @@ import schedule.dummyData.TaskList;
 
 public class TestSchedule {
 	
-	Schedule schedule;
+	Scheduler schedule;
 	List<PrioritizedTask> taskList;
 	
 	@BeforeClass
@@ -33,7 +33,7 @@ public class TestSchedule {
 
 	@Before
 	public void setUp() throws Exception {
-		schedule = new Schedule();
+		schedule = new Scheduler();
 		taskList = TaskList.buildDummyTaskListOneTask();
 	}
 

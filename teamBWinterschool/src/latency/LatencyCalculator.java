@@ -5,7 +5,7 @@ import java.util.Queue;
 
 import entities.RunnablesDuration;
 
-public class Latency {
+public class LatencyCalculator {
 	
 	
 	public int calculateE2ELatency(RunnablesDuration[] runnables, Queue<RunnablesDuration> eventChain) {
