@@ -135,9 +135,9 @@ public class LoadModifySaveExample {
 			priorList[i].setRecurrence();
 			System.out.println(priorList[i].getRecurrence());
 		}
-		System.out.println(priorList[0].getTask().);
 		
-		swm.getRunnables().
+		
+	
 		
 				
 		/*
