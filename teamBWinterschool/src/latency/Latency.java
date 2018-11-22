@@ -8,7 +8,6 @@ import entities.RunnablesDuration;
 public class Latency {
 	
 	
-	
 	public int calculateE2ELatency(RunnablesDuration[] runnables, Queue<RunnablesDuration> eventChain) {
 		if(eventChain.size() == 0) {
 			throw new IllegalArgumentException("EventChain mustn't be empty");
@@ -17,49 +16,48 @@ public class Latency {
 		boolean chainStarted = false;
 		boolean chainFinished = false;
 		RunnablesDuration currentState = null;
-		RunnablesDuration nextState = null;
+		RunnablesDuration nextState = eventChain.peek();
+		RunnablesDuration input = null;
 		int e2eLatency = 0;
 		
 		for(int i = 0; i < runnables.length; i++) {
-			// Start event chain
-			if(runnables[i] != null && !chainStarted) {
-				if(runnables[i].equals(eventChain.peek())) {
-					chainStarted = true;
+			input = runnables[i];
+			boolean lastInput = i == runnables.length - 1 ;
+
+			// Start of task chain
+			if(!chainStarted && currentState == null) {
+				if(input != null 
+						&& nextState != null 
+						&& input.equals(nextState)) {
 					
-					// Items from the current chain will be deleted from the array.
+					currentState = eventChain.poll();
+					nextState = eventChain.peek();
+					chainStarted = true;
 					runnables[i] = null;
 				}
 			}
-			
-			// Stay in current state (input is a runnable)
+			// Move to next state
 			else if(chainStarted 
-					&& runnables[i] != null 
-					&& eventChain.peek() != null 
-					&& runnables[i].equals(eventChain.peek())) {
-				
-				// Items from the current chain will be deleted from the array.
+					&& nextState != null 
+					&& currentState != null
+					&& input != null 
+					&& input.equals(nextState)) {
+				currentState = eventChain.poll();
+				nextState = eventChain.peek();
 				runnables[i] = null;
 			}
-			// Move to next state (input is a runnable)
-			else if(chainStarted 
-					&& runnables[i] != null 
-					&& eventChain.peek() != null 
-					&& !runnables[i].equals(eventChain.peek())) {
-				
-				// Items from the current chain will be deleted from the array.
-				eventChain.poll();
-				runnables[i] = null;
-			}
-			// Move to next state (input is null)
-			else if (chainStarted && runnables[i] == null) {
-				 //eventChain.poll();
-			}
 			
-			// Move to final state
-			if(runnables[i] == null && eventChain.peek() == null) {
+			// Chain ends
+			if(chainStarted && currentState != null && nextState == null && (input == null || !input.equals(currentState))) {
 				chainFinished = true;
 				break;
-			};
+			}
+			// Chain ends
+			else if(chainStarted && lastInput) {
+				chainFinished = true;
+				break;
+			}
+			// Else: stay in current state
 			
 			
 			if(chainStarted) {

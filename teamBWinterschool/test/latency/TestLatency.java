@@ -46,7 +46,7 @@ public class TestLatency {
 		
 		int actual = latency.calculateE2ELatency(runnables, eventChain);
 		
-		System.out.println("Latency 3: " + actual);
+		assertEquals(8, actual);
 	}
 
 	@Test
@@ -61,7 +61,6 @@ public class TestLatency {
 		RunnablesDuration[] runnables = new RunnablesDuration[15];
 		runnables[1] = r1;
 		runnables[2] = r2;
-		//runnables[3] = r1;
 		
 
 		Queue<RunnablesDuration> eventChain = new LinkedList<>();
@@ -71,7 +70,7 @@ public class TestLatency {
 		
 		int actual = latency.calculateE2ELatency(runnables, eventChain);
 		
-		System.out.println("Latency 2: " + actual);
+		assertEquals(2, actual);
 	}
 
 
