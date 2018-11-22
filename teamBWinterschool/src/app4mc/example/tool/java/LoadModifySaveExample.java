@@ -17,12 +17,17 @@ package app4mc.example.tool.java;
 import entities.*;
 import java.io.File;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.eclipse.app4mc.amalthea.model.Amalthea;
 import org.eclipse.app4mc.amalthea.model.AmaltheaFactory;
+import org.eclipse.app4mc.amalthea.model.ExecutionNeed;
 import org.eclipse.app4mc.amalthea.model.Frequency;
 import org.eclipse.app4mc.amalthea.model.HWModel;
+import org.eclipse.app4mc.amalthea.model.Need;
+import org.eclipse.app4mc.amalthea.model.NeedConstant;
 import org.eclipse.app4mc.amalthea.model.PeriodicStimulus;
+import org.eclipse.app4mc.amalthea.model.Runnable;
 import org.eclipse.app4mc.amalthea.model.SWModel;
 import org.eclipse.app4mc.amalthea.model.Stimulus;
 import org.eclipse.app4mc.amalthea.model.Tag;
@@ -80,9 +85,8 @@ public class LoadModifySaveExample {
 		for(Task t : taskList) {
 			priorList[flag0] = new PrioritizedTask();
 			priorList[flag0].setTask(t);
-			priorList[flag0].setSwm(swm);
-			priorList[flag0].setHwm(hwm);
-
+			//t.getCallGraph().get
+			
 			t.getStimuli().get(0);
 			flag0++;
 		}
@@ -131,6 +135,7 @@ public class LoadModifySaveExample {
 				int param=Integer.parseInt(pstr1);
 				if(array0[i]==param) {
 					priorList[i].setTask(taskList.get(j));
+					priorList[i].init();
 				}
 			}
 		}
@@ -141,17 +146,24 @@ public class LoadModifySaveExample {
 			
 			//System.out.println(taskOdered.get(i).getName());
 			priorList[i].setRecurrence();
-			System.out.println(priorList[i].getRecurrence());
+		
 		}
 		
 		
 		//System.out.println(priorList[0].getHwm().getDomains().get(0).);
-		
-		System.out.println(priorList[0].getHwm().getStructures().get(0).getStructures().get(0).getStructures().get(0).getModules().get(0));
-		
-		Frequency sss = HardwareUtil.getFrequencyOfModule(priorList[0].getHwm().getStructures().get(0).getStructures().get(0).getStructures().get(0).getModules().get(0));
-		System.out.println(sss.getUnit());
+		//SoftwareUtil.getProcesses(runnable, modes);
 				
+		
+		//System.out.println(swm.getTasks().get(0).getCallGraph().getGraphEntries().get(0).ge)
+		
+		//System.out.println(exeNeedList);
+		//System.out.println(exeNeedList.get(0).getDefault());
+		
+		System.out.println(priorList[0].getRunnables().get(0).getDuration());
+		
+		
+		
+		//SoftwareUtil.get
 		/*
 		Tag tag = fac.createTag();
 		tag.setName("The new tag!");
