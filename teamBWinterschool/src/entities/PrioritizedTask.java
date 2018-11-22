@@ -10,9 +10,10 @@ import org.eclipse.app4mc.amalthea.model.HWModel;
 
 public class PrioritizedTask {
 	private int recurrence;
-	
 	private Task task;
 	List<RunnablesDuration> runnables; 
+	
+	
 	
 	public PrioritizedTask() {
 		super();
@@ -41,4 +42,13 @@ public class PrioritizedTask {
 		int x= Integer.parseInt(str0);
 		this.recurrence = x;	
 	}
+		
+	public List<RunnablesDuration> getRunnables() {
+		return runnables;
+	}
+
+	public void setRunnables(List<RunnablesDuration> runnables) {
+		this.runnables = runnables;
+	}
+
 }
