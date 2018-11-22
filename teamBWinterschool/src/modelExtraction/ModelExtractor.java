@@ -56,9 +56,8 @@ public class ModelExtractor {
 		
 		// ***** Modify *****
 
-		// Used to create new objects within th eamalthea model.
+		// Used to create new objects within the amalthea model.
 		final AmaltheaFactory fac = AmaltheaFactory.eINSTANCE;
-		
 		
 		EList<Stimulus> stimuliList = model.getStimuliModel().getStimuli();
 		for(Stimulus s : stimuliList) {
@@ -66,6 +65,28 @@ public class ModelExtractor {
 				((PeriodicStimulus) s).getRecurrence();
 			}
 		}
+		
+		//Extract runnable queue from Constraint Model
+		ConstraintsModel csm = model.getConstraintsModel();
+		EList<EventChain> evenlist = csm.getEventChains();
+		EventChain event = evenlist.get(0);
+		
+		Queue<String> rQueue = new LinkedList<String>();
+		
+		EList<EventChainItem> queueList = event.getSegments();
+		//System.out.println(queueList.size());
+		
+		for (int i = 0; i < queueList.size(); i++) {
+			rQueue.add(event.getSegments().get(i).getEventChain().getResponse().getName());
+		}
+		rQueue.add(event.getSegments().get(queueList.size() - 1).getEventChain().getStimulus().getName());
+		
+//		System.out.println(rQueue.poll());
+//		System.out.println(rQueue.remove());
+//		System.out.println(rQueue.poll());
+//		System.out.println(rQueue.remove());
+		
+		
 		
 		SWModel swm = model.getSwModel();
 		
@@ -81,7 +102,7 @@ public class ModelExtractor {
 			t.getStimuli().get(0);
 			flag0++;
 		}
-		System.out.println(priorList[0]);
+		//System.out.println(priorList[0]);
 		
 		
 		/// making a integer array with using stimuli data from the tasks
@@ -100,7 +121,7 @@ public class ModelExtractor {
 		}
 		flag=0;
 		for(int i=0; i<priorList.length; i++) {
-			System.out.println(array0[i]);
+			//System.out.println(array0[i]);
 		}
 		
 		/// making a bubble sort with using task stimuli data
@@ -118,7 +139,7 @@ public class ModelExtractor {
 		/// assigning tasks in order of bubble sort result
 		for(int i=0; i<priorList.length; i++) {
 			for(int j=0; j<array0.length; j++) {
-				String str1=taskList.get(j).getStimuli().get(0).toString();
+				String str1= taskList.get(j).getStimuli().get(0).toString();
 				String pstr1=str1.substring(85, str1.length()-3);
 				
 				int param=Integer.parseInt(pstr1);
