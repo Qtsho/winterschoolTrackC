@@ -72,6 +72,7 @@ public class Schedule {
 					scheduledRunnables[time] = runnablesDuration;
 					timeSpendInCurrentTask++;
 				} catch (TaskOutOfBoundsException e) {
+					currentTask = null;
 					if (taskQueue.peek() != null) {
 						currentTask = taskQueue.poll();
 						timeSpendInCurrentTask = 0;

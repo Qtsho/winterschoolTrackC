@@ -70,6 +70,8 @@ public class TestSchedule {
 	public void testActivation() {
 		PrioritizedTask[][] activation = schedule.calculateActivation(taskList);
 		PrioritizedTask task1 = taskList.get(0);
+		//PrioritizedTask task2 = taskList.get(1);
+		
 		
 		assertEquals(activation[0][0], task1);
 		assertEquals(activation[15][0], task1);
@@ -82,7 +84,7 @@ public class TestSchedule {
 	public void testScheduling() {
 		PrioritizedTask task1 = taskList.get(0);
 		RunnablesDuration r1 = taskList.get(0).getRunnables().get(0);
-
+		
 		PrioritizedTask[][] activation = schedule.calculateActivation(taskList);
 		RunnablesDuration[] actual = schedule.scheduling(activation);
 		RunnablesDuration[] expected = new RunnablesDuration[61];
@@ -90,17 +92,21 @@ public class TestSchedule {
 		expected[0] = r1;
 		expected[1] = r1;
 		expected[2] = r1;
+		
 		expected[15] = r1;
 		expected[16] = r1;
 		expected[17] = r1;
+		
 		expected[30] = r1;
 		expected[31] = r1;
 		expected[32] = r1;
+		
 		expected[45] = r1;
 		expected[46] = r1;
 		expected[47] = r1;
-		expected[60] = r1;
 		
+		expected[60] = r1;
+	
 		assertArrayEquals(expected, actual);
 		
 		System.out.println("==================");
@@ -109,6 +115,87 @@ public class TestSchedule {
 			System.out.println(i + " :: " + actual[i]);
 		}
 		System.out.println("==================");
+	}
+	
+	@Test
+	public void testMultipleTask () {
+		taskList = TaskList.buildDummyTaskList();
+		PrioritizedTask task1 = taskList.get(0);
+		RunnablesDuration r1 = taskList.get(0).getRunnables().get(0);
+		
+		PrioritizedTask task2 = taskList.get(1);
+		RunnablesDuration r2 = taskList.get(1).getRunnables().get(0);
+		
+		PrioritizedTask task3 = taskList.get(2);
+		RunnablesDuration r3 = taskList.get(2).getRunnables().get(0);
+		
+		PrioritizedTask[][] activation = schedule.calculateActivation(taskList);
+		RunnablesDuration[] actual = schedule.scheduling(activation);
+		RunnablesDuration[] expected = new RunnablesDuration[61];
+		
+		expected[0] = r1;
+		expected[1] = r1;
+		expected[2] = r1;
+		
+		expected[15] = r1;
+		expected[16] = r1;
+		expected[17] = r1;
+		
+		expected[30] = r1;
+		expected[31] = r1;
+		expected[32] = r1;
+		
+		expected[45] = r1;
+		expected[46] = r1;
+		expected[47] = r1;
+		
+		expected[60] = r1;
+		
+		//Task 2
+		expected[3] = r2;
+		expected[4] = r2;
+		expected[5] = r2;
+		expected[6] = r2;
+		expected[7] = r2;
+		
+		expected[20] = r2;
+		expected[21] = r2;
+		expected[22] = r2;
+		expected[23] = r2;
+		expected[24] = r2;
+		
+		expected[40] = r2;
+		expected[41] = r2;
+		expected[42] = r2;
+		expected[43] = r2;
+		expected[44] = r2;
+		
+		//Task 3
+		expected[8] = r3;
+		expected[9] = r3;
+		expected[10] = r3;
+		expected[11] = r3;
+		expected[12] = r3;
+		expected[13] = r3;
+		expected[14] = r3;
+		
+		expected[33] = r3;
+		expected[34] = r3;
+		expected[35] = r3;
+		expected[36] = r3;
+		expected[37] = r3;
+		expected[38] = r3;
+		expected[39] = r3;
+		
+		System.out.println("Multiple=========");
+		System.out.println("Schedule");
+		for(int i = 0; i < actual.length; i++) {
+			System.out.println(i + " :: " + actual[i]);
+		}
+		System.out.println("==================");
+		
+		assertArrayEquals(expected, actual);
+		
 	}
 
 }

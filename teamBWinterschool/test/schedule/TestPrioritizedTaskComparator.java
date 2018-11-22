@@ -46,7 +46,7 @@ public class TestPrioritizedTaskComparator {
 		task1.setRecurrence(5);
 		task2.setRecurrence(3);
 		
-		assertEquals(-1, comp.compare(task1, task2));
+		assertEquals(1, comp.compare(task1, task2));
 	}
 	
 	@Test
@@ -58,7 +58,7 @@ public class TestPrioritizedTaskComparator {
 		task1.setRecurrence(5);
 		task2.setRecurrence(6);
 		
-		assertEquals(1, comp.compare(task1, task2));
+		assertEquals(-1, comp.compare(task1, task2));
 	}
 	
 	@Test
