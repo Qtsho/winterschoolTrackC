@@ -4,6 +4,7 @@ import entities.*;
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import org.eclipse.app4mc.amalthea.model.Amalthea;
 import org.eclipse.app4mc.amalthea.model.AmaltheaFactory;
@@ -17,6 +18,7 @@ import org.eclipse.app4mc.amalthea.model.Runnable;
 import org.eclipse.app4mc.amalthea.model.SWModel;
 import org.eclipse.app4mc.amalthea.model.ConstraintsModel;
 import org.eclipse.app4mc.amalthea.model.EventChain;
+import org.eclipse.app4mc.amalthea.model.EventChainItem;
 import org.eclipse.app4mc.amalthea.model.Stimulus;
 import org.eclipse.app4mc.amalthea.model.Tag;
 import org.eclipse.app4mc.amalthea.model.Task;
@@ -35,6 +37,36 @@ public class ModelExtractor {
 		modelExtractor.calculatePrioritizedTaskList("Model/simpleModel.amxmi");
 	}
 	
+	/**
+	 * @return a queue of the runnable names
+	 */
+	public Queue<String> extractEventChain(String inputFilePath) {
+		// example: relative path
+		final File inputFile = new File(inputFilePath);
+		Amalthea model = AmaltheaLoader.loadFromFile(inputFile);
+
+		if (model == null) {
+			throw new IllegalArgumentException("Error: No model loaded!");
+		}
+		
+		//Extract runnable queue from Constraint Model
+		ConstraintsModel csm = model.getConstraintsModel();
+		EList<EventChain> evenlist = csm.getEventChains();
+		EventChain event = evenlist.get(0);
+		
+		Queue<String> rQueue = new LinkedList<String>();
+		
+		EList<EventChainItem> queueList = event.getSegments();
+		//System.out.println(queueList.size());
+		
+		for (int i = 0; i < queueList.size(); i++) {
+			rQueue.add(event.getSegments().get(i).getEventChain().getResponse().getName());
+		}
+		rQueue.add(event.getSegments().get(queueList.size() - 1).getEventChain().getStimulus().getName());
+	
+		return rQueue;
+	}
+	
 	public PrioritizedTask[] calculatePrioritizedTaskList(String inputFilePath) {
 
 		// example: absolute path
@@ -43,9 +75,6 @@ public class ModelExtractor {
 
 		// example: relative path
 		final File inputFile = new File(inputFilePath);
-
-		// ***** Load *****
-
 		Amalthea model = AmaltheaLoader.loadFromFile(inputFile);
 
 		if (model == null) {
@@ -66,20 +95,7 @@ public class ModelExtractor {
 			}
 		}
 		
-		//Extract runnable queue from Constraint Model
-		ConstraintsModel csm = model.getConstraintsModel();
-		EList<EventChain> evenlist = csm.getEventChains();
-		EventChain event = evenlist.get(0);
-		
-		Queue<String> rQueue = new LinkedList<String>();
-		
-		EList<EventChainItem> queueList = event.getSegments();
-		//System.out.println(queueList.size());
-		
-		for (int i = 0; i < queueList.size(); i++) {
-			rQueue.add(event.getSegments().get(i).getEventChain().getResponse().getName());
-		}
-		rQueue.add(event.getSegments().get(queueList.size() - 1).getEventChain().getStimulus().getName());
+
 		
 //		System.out.println(rQueue.poll());
 //		System.out.println(rQueue.remove());
