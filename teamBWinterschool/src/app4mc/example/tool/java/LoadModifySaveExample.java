@@ -29,6 +29,8 @@ import org.eclipse.app4mc.amalthea.model.NeedConstant;
 import org.eclipse.app4mc.amalthea.model.PeriodicStimulus;
 import org.eclipse.app4mc.amalthea.model.Runnable;
 import org.eclipse.app4mc.amalthea.model.SWModel;
+import org.eclipse.app4mc.amalthea.model.ConstraintsModel;
+import org.eclipse.app4mc.amalthea.model.EventChain;
 import org.eclipse.app4mc.amalthea.model.Stimulus;
 import org.eclipse.app4mc.amalthea.model.Tag;
 import org.eclipse.app4mc.amalthea.model.Task;
@@ -37,6 +39,7 @@ import org.eclipse.app4mc.amalthea.model.io.AmaltheaWriter;
 import org.eclipse.app4mc.amalthea.model.util.ModelUtil;
 import org.eclipse.app4mc.amalthea.model.util.SoftwareUtil;
 import org.eclipse.app4mc.amalthea.model.util.HardwareUtil;
+
 import org.eclipse.emf.common.util.EList;
 
 public class LoadModifySaveExample {
@@ -149,26 +152,8 @@ public class LoadModifySaveExample {
 		
 		}
 		
+		// System.out.println(priorList[0].getRunnables().get(0).getDuration());
 		
-		//System.out.println(priorList[0].getHwm().getDomains().get(0).);
-		//SoftwareUtil.getProcesses(runnable, modes);
-				
-		
-		//System.out.println(swm.getTasks().get(0).getCallGraph().getGraphEntries().get(0).ge)
-		
-		//System.out.println(exeNeedList);
-		//System.out.println(exeNeedList.get(0).getDefault());
-		
-		System.out.println(priorList[0].getRunnables().get(0).getDuration());
-		
-		
-		
-		//SoftwareUtil.get
-		/*
-		Tag tag = fac.createTag();
-		tag.setName("The new tag!");
-		ModelUtil.getOrCreateCommonElements(model).getTags().add(tag);
-		 */
 
 		// ***** Save *****
 
