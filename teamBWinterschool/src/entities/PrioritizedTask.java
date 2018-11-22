@@ -2,11 +2,9 @@ package entities;
 import org.eclipse.app4mc.amalthea.model.Runnable;
 import org.eclipse.app4mc.amalthea.model.Task;
 import org.eclipse.app4mc.amalthea.model.util.SoftwareUtil;
-import org.eclipse.app4mc.amalthea.model.SWModel;
-
 import java.util.LinkedList;
 import java.util.List;
-import org.eclipse.app4mc.amalthea.model.HWModel;
+
 
 
 public class PrioritizedTask {
