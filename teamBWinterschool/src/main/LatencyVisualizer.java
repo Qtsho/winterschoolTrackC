@@ -34,17 +34,38 @@ public class LatencyVisualizer {
 		RunnablesDuration[] scheduled = scheduler.scheduling(activation, prioTaskList);
 		//Queue<String> eventChain = modelExtractor.extractEventChain(modelPath);
 		
+		System.out.println("Priority==========");
+		for(PrioritizedTask task : prioTaskList) {
+			System.out.println(task);
+		}
 		
+		System.out.println("ACTIVATION==========");
+		for(int i = 0; i < activation.length; i++) {
+			System.out.println(" - i: " + i);
+			for(int j = 0; j < activation[i].length; j++) {
+				System.out.println("    - Task: " + activation[i][j]);
+			}
+		}
+		
+		System.out.println("SCHEDULE");
+		for(int i = 0; i < scheduled.length; i++) {
+			System.out.println(" - i: " + i + "  ::  " + scheduled[i]);
+		}
+		
+		
+		System.out.println("Runnable Durations========");
 		// Create a dummy event chain
 		Queue<RunnablesDuration> eventChain = new LinkedList<>();
 		for(PrioritizedTask task : prioTaskList) {
+			System.out.println(" - " + task);
 			for(RunnablesDuration runnable : task.getRunnables()) {
 				eventChain.add(runnable);
+				System.out.println("     - " + runnable + " :: " + runnable.getDuration());
 			}
 		}
 		
 		List<Integer> latencies = latencyCalc.calculateE2ELatency(scheduled, eventChain);
-		System.out.println("======== RESULT =========");
+		System.out.println("======== Latency =========");
 		System.out.println(latencies.get(0));
 		System.out.println("=================");
 
